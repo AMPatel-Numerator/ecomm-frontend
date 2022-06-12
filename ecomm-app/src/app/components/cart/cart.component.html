@@ -1,0 +1,39 @@
+<div class="container" *ngIf="order">
+  <h3 id="order-id">Total Items : {{order.number}}</h3>
+  <div class="line-item" *ngFor="let item of order.items">
+      <div class="col-sm-3" id="product-details">
+          <img *ngIf="item.imageUrl" class="image-xs" src="{{item.imageUrl}}" alt="product photo">
+          <div *ngIf="!item.imageUrl" class="image-xs no-image"></div>
+          <div id="line-details">
+              <div>{{item.name}}</div>
+              <div> {{item.price | currency:'EUR' }} </div>
+          </div>
+      </div>
+      <div id="product-config">
+          <app-item-quantity [quantity]="item.quantity || 0" [disabled]="true"></app-item-quantity>
+          <div class="itemTotal"> {{item.price | currency:'EUR' }} </div>
+          <button mat-icon-button color="warn" (click)="deleteItem(item.id || 0)">
+              <mat-icon>clear</mat-icon>
+      </button>
+      </div>
+  </div>
+<mat-divider></mat-divider>
+  <div class="costSummary">
+      <div class="costItem" id="total">
+          <h2 id="totalLabel">Total</h2>
+          <h2> {{order.totalAmount | currency:'EUR'}} </h2>
+      </div>
+  </div>
+  <div class="costSummary">
+    <div class="address" id="address">
+        <h2 id="totalLabel">Address</h2>
+        <h4> {{order.address}} </h4>
+    </div>
+</div>
+  <div id="checkout-button">
+      <button color="primary" mat-flat-button (click)="checkout()">
+      <mat-icon>point_of_sale</mat-icon>
+      CHECKOUT
+  </button>
+  </div>
+</div>

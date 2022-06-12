@@ -9,12 +9,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMaterialModule } from './components/ng-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
+import { NO_ERRORS_SCHEMA } from '@angular/compiler';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsComponent } from './components/products/products.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ProductComponent } from './components/product/product.component';
+import { ItemQuantityComponent } from './components/item-quantity/item-quantity.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    ProductsComponent,
+    ProfileComponent,
+    CartComponent,
+    ProductComponent,
+    ItemQuantityComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +37,9 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     NgMaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
