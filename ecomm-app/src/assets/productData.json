@@ -1,0 +1,71 @@
+ [{
+     "productId": 1,
+     "name": "Iphone 12",
+     "imageUrl": "./../../assets/images/prod_1.jpg",
+     "price": "1800",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 2,
+     "name": "Ipad",
+     "imageUrl": "./../../assets/images/prod_2.jpg",
+     "price": "1200",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 3,
+     "name": "Bose Headphone",
+     "imageUrl": "./../../assets/images/prod_3.jpg",
+     "price": "800",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 4,
+     "name": "Samsung Watch",
+     "imageUrl": "./../../assets/images/prod_4.jpg",
+     "price": "300",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 5,
+     "name": "JBL speaker",
+     "imageUrl": "./../../assets/images/prod_5.jpg",
+     "price": "600",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 6,
+     "name": "Iphone 12",
+     "imageUrl": "./../../assets/images/prod_6.jpg",
+     "price": "1700",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 7,
+     "name": "Ipad",
+     "imageUrl": "./../../assets/images/prod_7.jpg",
+     "price": "800",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 8,
+     "name": "Bose Headphone",
+     "imageUrl": "./../../assets/images/prod_8.jpg",
+     "price": "300",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 9,
+     "name": "Samsung Watch",
+     "imageUrl": "./../../assets/images/prod_9.jpg",
+     "price": "500",
+     "description": "Apple Best Seller"
+   },
+   {
+     "productId": 10,
+     "name": "JBL speaker",
+     "imageUrl": "./../../assets/images/prod_10.jpg",
+     "price": "100",
+     "description": "Apple Best Seller"
+   }
+ ]

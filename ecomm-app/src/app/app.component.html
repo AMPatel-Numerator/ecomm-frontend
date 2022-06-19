@@ -1,13 +1,14 @@
 <mat-toolbar color="secondary" class="app-header">
-  <span class="nav-tool-items">
+  <span class="nav-tool-items" *ngIf="router.url === '/login'">
     <button mat-button routerLink="login" routerLinkActive="active">LogIn</button>
     <a mat-button routerLink="signup" routerLinkActive="active">SignUp</a>
   </span>
-  <span class="nav-tool-items">
+  <span class="nav-tool-items" fxFlex fxLayoutAlign="flex-end center" *ngIf="(router.url !== '/login' && router.url !== '/signup')">
     <button mat-button routerLink="home" routerLinkActive="active">Home</button>
     <button mat-button routerLink="products-list" routerLinkActive="active">Products</button>
     <button mat-button routerLink="cart" routerLinkActive="active">Go To Cart</button>
     <button mat-button routerLink="profile" routerLinkActive="active">My Profile</button>
+    <button mat-button routerLinkActive="active" (click)="logoutUser()">Logout</button>
   </span>
 </mat-toolbar>
 

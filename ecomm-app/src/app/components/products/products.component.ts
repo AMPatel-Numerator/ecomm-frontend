@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   public getProducts(): void {
     this.productService.getProducts().subscribe((response: any) => {
       if (response && response.succeed && response.result.length > 0) {
-        this.products = Array(10).fill(response.result[0])
+        this.products = response.result;
       }
     })
   }

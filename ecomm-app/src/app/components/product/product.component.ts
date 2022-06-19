@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((res: any) => {
-      const productId: number = (res && res.params && res.params['id']) ? res.params['id'] : 5;
+      const productId: number = (res && res.params && res.params['id']) ? res.params['id'] : 1;
       this.productService.getProduct(productId).subscribe((response: any) => {
         if (response && response.succeed) {
           this.product = response.result;
