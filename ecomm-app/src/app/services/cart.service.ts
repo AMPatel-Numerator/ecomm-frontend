@@ -16,13 +16,13 @@ export class CartService {
 
   constructor(private storage: LocalStorageService) { }
 
-  get orderId(): string {
+  get orderId(): number {
     const id = this.storage.getItem('order-id');
-    return id ? id : '';
+    return id ? parseInt(id) : 0;
   }
 
-  set orderId(id: string) {
-    this.storage.addItem('order-id', id);
+  set orderId(id: number) {
+    this.storage.addItem('order-id', id.toString());
     this.cart.next({ orderId: id, itemCount: this.itemCount });
   }
 
@@ -47,6 +47,7 @@ export class CartService {
 
   clearCart() {
     this.storage.deleteItem('item-count');
-    this.cart.next({ orderId: '', itemCount: 0 });
+    this.storage.deleteItem('order-id');
+    this.cart.next({ orderId: 0, itemCount: 0 });
   }
 }

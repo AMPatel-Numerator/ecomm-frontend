@@ -1,10 +1,11 @@
 import { Item } from "./item";
 
 export interface Order {
-  id?: number;
-  number?: number;
+  orderId?: number;
+  itemsCount?: number;
   userId?: number;
   items?: Item[];
   totalAmount?: number;
   address?: string;
+  status?:string;
 }

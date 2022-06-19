@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  products : any[] =  Array(10).fill({ id: 1 , name : 'Iphone 12' , imageUrl : './../../assets/images/prod_1.jpg' , price : 1800  });
-  cols = 5;
-  constructor() { }
+  public products: Product[] = []
+  public cols = 5;
+  constructor(private productService: ProductService) { }
   ngOnInit(): void {
+    this.getProducts();
   }
 
+  public getProducts(): void {
+    this.productService.getProducts().subscribe((response: any) => {
+      if (response && response.succeed && response.result.length > 0) {
+        this.products = Array(10).fill(response.result[0])
+      }
+    })
+  }
 }

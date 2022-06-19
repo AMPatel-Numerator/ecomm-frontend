@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +16,7 @@ export class SignupComponent implements OnInit {
   public name = '';
   public address = '';
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private _router: Router, private snackBar: MatSnackBar) {
     // no comments
   }
 
@@ -24,7 +26,21 @@ export class SignupComponent implements OnInit {
 
   public onSubmit(): void {
     const userInfo: User = { name: this.name, address: this.address, username: this.username, password: this.password };
-    this.userService.signUp(userInfo);
+    this.userService.signUp(userInfo).subscribe((response: any) => {
+      if (response.succeed) {
+        this.snackBar.open(
+          response.message,
+          'Close',
+          { duration: 2000 });
+        this._router.navigateByUrl('/login');
+      } else {
+        this.snackBar.open(
+          'Signup failed. Check your user details.',
+          'Close',
+          { duration: 6000 });
+      }
+    }
+    );
   }
 
 }
