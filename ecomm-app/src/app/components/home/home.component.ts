@@ -9,7 +9,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
 
-  images = ["./../../assets/images/bg_1.jpg"];
+  images = ["./../../assets/images/bg_1.jpg", "./../../assets/images/bg_2.jpg", "./../../assets/images/bg_3.jpg"];
 
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree

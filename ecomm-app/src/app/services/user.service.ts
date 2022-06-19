@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
@@ -7,9 +8,15 @@ import { User } from '../models/user';
 })
 export class UserService {
 
+  constructor(private readonly http: HttpClient) {}
+
   public login(username: string, password: string): Observable<any> {
     console.log(username, password);
+
+    const url: string = `/api/v1/defaultAccount/`;
+		// return this.http.get(url, {});
     return of({ hello: "asds" });
+
   }
 
   public signUp(userDetails: User): Observable<any> {
@@ -25,6 +32,21 @@ export class UserService {
   public updateUser(userDetails: User): Observable<any> {
     console.log(userDetails);
     return of({ hello: "asds" });
+  }
+
+  public getAllProducts(): Observable<any> {
+
+    const url: string = `/api/v1/fetchAllProducts/`;
+		return this.http.get("../../assets/productData.json");
+
+  }
+
+  public getProductDetails(productId: string | null): Observable<any> {
+
+    const url: string = `/api/v1/fetchAllProducts/${productId}`;
+    console.log('url', url);
+		return this.http.get("../../assets/productData.json");
+
   }
 
 }
