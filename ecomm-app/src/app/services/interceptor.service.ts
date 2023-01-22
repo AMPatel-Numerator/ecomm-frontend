@@ -17,7 +17,7 @@ export class InterceptorService implements HttpInterceptor {
   constructor(private localStorageService: LocalStorageService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    this.isEndpointProtected = true;
     this.ignoreInterceptorEndpoints.forEach(endpoint => {
       if (req.url.includes(endpoint)) {
         this.isEndpointProtected = false;
