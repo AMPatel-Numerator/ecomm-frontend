@@ -1,5 +1,6 @@
 
 export interface DialogData {
   message:string;
-  address:string;
+  price:string;
+  date:string
 }

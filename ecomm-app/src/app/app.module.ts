@@ -20,6 +20,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { InterceptorService } from './services/interceptor.service';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { InterceptorService } from './services/interceptor.service';
     CartComponent,
     ProductComponent,
     ItemQuantityComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { InterceptorService } from './services/interceptor.service';
     FlexLayoutModule,
     FormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    MatNativeDateModule
   ],
   providers: [
     AuthService,

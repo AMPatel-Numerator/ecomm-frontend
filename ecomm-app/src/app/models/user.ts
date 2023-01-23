@@ -3,5 +3,14 @@ export interface User {
   name?:string;
   username?:string;
   password?:string;
-  address?:string;
+  contact?:string;
+}
+
+
+export interface Contact {
+  firstName:string;
+  lastName:string;
+  email:string;
+  subject:string;
+  query:string;
 }

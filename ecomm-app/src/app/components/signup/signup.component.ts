@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   public username = '';
   public password = '';
   public name = '';
-  public address = '';
+  public contact = '';
 
   constructor(private userService: UserService, private _router: Router, private snackBar: MatSnackBar) {
     // no comments
@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const userInfo: User = { name: this.name, address: this.address, username: this.username, password: this.password };
+    const userInfo: User = { name: this.name, contact: this.contact, username: this.username, password: this.password };
     this.userService.signUp(userInfo).subscribe((response: any) => {
       if (response.succeed) {
         this.snackBar.open(

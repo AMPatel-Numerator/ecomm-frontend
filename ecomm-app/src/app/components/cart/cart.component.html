@@ -1,50 +1,32 @@
-<div class="container" *ngIf="order && order.itemsCount ">
-  <h3 id="order-id">Total Items : {{order.itemsCount}}</h3>
-  <div class="line-item" *ngFor="let item of order.items">
-    <div class="col-sm-3" id="product-details">
-      <img *ngIf="item.imageUrl" class="image-xs" src="{{item.imageUrl}}" alt="product photo">
-      <div *ngIf="!item.imageUrl" class="image-xs no-image"></div>
-      <div id="line-details">
-        <div>{{item.name}}</div>
-        <div> {{item.price | currency:'EUR' }} </div>
-      </div>
-    </div>
-    <div id="product-config">
-      <app-item-quantity [quantity]="item.quantity || 0" [disabled]="true"></app-item-quantity>
-      <div class="itemTotal"> {{item.price | currency:'EUR' }} </div>
-      <button mat-icon-button color="warn" (click)="deleteItem(item.itemId || 0)">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
+<div class="table1">
+  <h1 id="order-id">My Bookings </h1>
+  <div *ngIf="bookings.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Place</th>
+          <th scope="col">Country</th>
+          <th scope="col">Price</th>
+          <th scope="col">Date</th>
+          <th scope="col">Travelling Mode</th>
+          <th scope="col">Food</th>
+          <th scope="col"> Cancel </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of bookings ">
+          <td>{{data.placeName}}</td>
+          <td>{{data.placeCountry}}</td>
+          <td>{{data.price | currency:'EUR' }}</td>
+          <td>{{data.date}}</td>
+          <td>{{data.mode}}</td>
+          <td>{{data.food}}</td>
+          <td><a (click)="cancel(data)" class="btn btn-primary btn-lg w-15">Cancel</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <mat-divider></mat-divider>
-  <div *ngIf="order.itemsCount">
-    <div class="costSummary">
-      <div class="costItem" id="total">
-        <h2 id="totalLabel">Total</h2>
-        <h2> {{order.totalAmount | currency:'EUR'}} </h2>
-      </div>
-    </div>
-    <div class="costSummary">
-      <div class="address" id="address">
-        <h2 id="totalLabel">Address</h2>
-        <h4> {{order.address}} </h4>
-      </div>
-    </div>
-    <div id="checkout-button">
-      <button color="primary" mat-flat-button (click)="checkout()">
-        <mat-icon>point_of_sale</mat-icon>
-        CHECKOUT
-      </button>
-    </div>
+  <div *ngIf="bookings.length == 0">
+    <h3 style="text-align: center;"> No Bookings yet </h3>
   </div>
-</div>
-<div *ngIf="!order.itemsCount" class="center mt-5 pt-5">
-  <h1> Cart is empty! </h1>
-</div>
-<div *ngIf="!order.itemsCount" class="center mt-2 pt-2">
-  <button color="primary" mat-flat-button routerLink="/products-list" routerLinkActive="active">
-    <mat-icon>point_of_sale</mat-icon>
-    Go to Products
-  </button>
 </div>

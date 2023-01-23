@@ -5,12 +5,14 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { ErrorHandlerService } from './error-handler.service';
 import { catchError } from 'rxjs/operators';
+import { Contact } from '../components/contact/contact.component';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
   private registerUrl: string = `${environment.apiUrl}/register`;
+  private contactUrl: string = `${environment.apiUrl}/contact`;
   private userUrl:string = `${environment.apiUrl}/user`;
   private loginUrl: string = `${environment.apiUrl}/login`;
 
@@ -37,6 +39,11 @@ export class UserService {
 
   public updateUser(userDetails: User): Observable<any> {
     return this.http.put<any>(this.registerUrl, userDetails)
+      .pipe(catchError(this.eh.handleError));
+  }
+
+  public contact(contact: Contact): Observable<any> {
+    return this.http.post<any>(this.contactUrl, contact)
       .pipe(catchError(this.eh.handleError));
   }
 

@@ -1,24 +1,42 @@
 <div id="container">
   <mat-card *ngIf="product" class="product-card">
-      <img mat-card-image src="{{product.imageUrl}}" alt="Photo of a product">
+      <img style="max-height: 400px; max-width: 500px;" mat-card-image src="{{product.imageUrl}}" alt="Photo of a product">
       <mat-card-content>
           <mat-card-title>{{product.name}}</mat-card-title>
-          <mat-card-subtitle>{{product.price | currency:'EUR'}}</mat-card-subtitle>
           <p>
-              {{product.description}}
+            {{product.description}}
           </p>
+          <div class="col-md-12 mt-2 mb-3">
+            <h4 class="mb-3 font-weight-bold text-warning" style="text-transform: uppercase"><strong> Package Details</strong></h4>
+            <p><b>Country :</b> {{product.country}} </p>
+            <p><b>Basic Charges:</b> {{product.price | currency:'EUR'}} </p>
+            <mat-form-field>
+                <input required matInput [(ngModel)]="defaultDate" (dateChange)="setDate($event)" [matDatepicker] = "picker" placeholder = "Choose a start date">
+                <mat-datepicker-toggle matSuffix [for] = "picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+             </mat-form-field>
+             <div>
+                <b><label id="example-radio-group-label"> Food :&thinsp; </label></b>
+                <mat-radio-group (change)="foodChange($event)" aria-label="Food" [(ngModel)]="food">
+                    <mat-radio-button value="Yes"> Yes (+{{ ' 3000'| currency:'EUR'}}) </mat-radio-button>
+                    <mat-radio-button value="No" >No </mat-radio-button>
+                  </mat-radio-group>
+             </div>
+            <br>
+            <div>
+                <b><label id="example-radio-group-label"> Travelling Mode :&thinsp; </label></b>
+                <mat-radio-group (change)="modeChange($event)" aria-label="Mode" [(ngModel)]="mode">
+                    <mat-radio-button value="Bus"> Bus </mat-radio-button>
+                    <mat-radio-button value="Train" > Train (+{{ ' 1000'| currency:'EUR'}})</mat-radio-button>
+                    <mat-radio-button value="Flight" > Flight (+{{ ' 5000'| currency:'EUR'}}) </mat-radio-button>
+                  </mat-radio-group>
+             </div>
+            <br>
+            <p><b>Duration : </b> {{ product.numDays }}&thinsp; Days&thinsp;{{ product.numNights }}&thinsp; Nights </p>
+            <a (click)="book()" class="btn btn-primary btn-lg w-15">BOOK</a>
+          </div>
+          <br>
       </mat-card-content>
-      <mat-card-actions>
-          <app-item-quantity [quantity]="quantity" [maxValue]="10" (setQuantityEvent)="setQuantity($event)"></app-item-quantity>
-          <button mat-raised-button color="secondary" (click)="addItemToCart()">
-              <mat-icon>add_shopping_cart</mat-icon>
-              Add to cart
-          </button>
-          <button mat-raised-button color="primary" (click)="goBack()">
-              <mat-icon>storefront</mat-icon>
-              Continue shopping
-          </button>
-      </mat-card-actions>
   </mat-card>
   <h2 *ngIf="!product" class="pt-5 mt-5 text-center"> Product is not available !</h2>
 </div>

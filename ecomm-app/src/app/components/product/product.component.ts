@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/models/product';
-import { ActivatedRoute } from '@angular/router';
+import { Booking, Product } from 'src/app/models/product';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
-import { ItemsService } from 'src/app/services/items.service';
-import { CartService } from 'src/app/services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-product',
@@ -16,15 +16,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductComponent implements OnInit {
 
   public product: Product = {};
+  public picker:any;
+  public booking:Booking = {};
+  public food:string = 'No';
+  public mode:string = 'Bus';
   quantity: number = 0;
+  defaultDate:Date = new Date();
   constructor(
     private location: Location,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private orders: OrderService,
-    private itemsService: ItemsService,
-    private cartService: CartService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    private orderService:OrderService,
+    private router: Router,
+    public dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -33,66 +38,71 @@ export class ProductComponent implements OnInit {
       this.productService.getProduct(productId).subscribe((response: any) => {
         if (response && response.succeed) {
           this.product = response.result;
+          this.booking.description = this.product.description;
+          this.booking.numDays = this.product.numDays;
+          this.booking.numNights = this.product.numNights;
+          this.booking.placeCountry = this.product.country;
+          this.booking.placeName = this.product.name;
+          this.booking.price = this.product.price;
+          this.booking.date = this.defaultDate.toISOString().split('T')[0];
         }
       })
     })
   }
 
-  addItemToCart(): void {
-    if (this.quantity > 0) {
-      if (this.cartService.orderId == 0) {
-        this.orders.createOrder().subscribe(
-          (response: any) => {
-            if (response && response.succeed) {
-              this.cartService.orderId = response.order.orderId || 0;
-              this.itemsService.createItem({
-                orderId: response.order.orderId,
-                productId: this.product.productId,
-                name: this.product.name,
-                quantity: this.quantity,
-                price: this.product.price,
-                imageUrl: this.product.imageUrl,
-                itemAmount: this.product.price ? (this.product.price * this.quantity) : 0,
-              }).subscribe((response: any) => {
-                if (response && response.succeed) {
-                  this.cartService.incrementItemCount(this.quantity);
-                  this.showSuccessSnackBar();
-                }
-              })
-            }
-          })
-      }
-      else {
-        this.itemsService.createItem({
-          orderId: this.cartService.orderId,
-          productId: this.product.productId,
-          name: this.product.name,
-          quantity: this.quantity,
-          price: this.product.price,
-          imageUrl: this.product.imageUrl,
-          itemAmount: this.product.price ? (this.product.price * this.quantity) : 0,
-        }).subscribe((resp: any) => {
-          if (resp && resp.succeed) {
-            this.cartService.incrementItemCount(this.quantity);
-            this.showSuccessSnackBar();
-          }
-        })
-      }
-    }
-    else {
-      this.snackBar.open('Select a quantity greater than 0.', 'Close', { duration: 8000 });
-    }
-  }
   goBack(): void {
     this.location.back();
   }
 
-  setQuantity(no: number) {
-    this.quantity = no;
+  book() {
+    if (this.booking.mode === "Train") {
+      this.booking.price = (this.booking.price || 0) + 1000;
+    } else if (this.booking.mode === "Flight") {
+      this.booking.price = (this.booking.price || 0) + 5000;
+    } else{
+      this.booking.mode = 'Bus'
+    }
+    if (this.booking.food === "Yes") {
+      this.booking.price = (this.booking.price || 0) + 3000;
+    } else{
+      this.booking.food = 'No';
+    }
+    console.log(this.booking)
+    this.showSuccessSnackBar();
   }
-
+  modeChange(data:any){
+    this.booking.mode = data.value;
+  }
+  foodChange(data:any){
+    this.booking.food = data.value;
+  }
+  setDate(date:any) {
+    const stringified = JSON.stringify(date.value);
+    const dob = stringified.substring(1, 11);
+    this.booking.date = dob;
+  }
   private showSuccessSnackBar() {
-    this.snackBar.open('Item successfully added to cart.', 'Close', { duration: 5000 });
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: '400px',
+      data: {
+        message: 'Are you sure you want to book this tour package ?',
+        price: this.booking.price, date: this.booking.date
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.orderService.createOrder(this.booking).subscribe((res: any) => {
+          if (res.succeed) {
+            this.snackBar.open('Tour Package successfully booked', 'Close', { duration: 5000 });
+            this.router.navigateByUrl("/bookings");
+          }
+        })
+      } else{
+        this.booking.price = this.product.price
+      }
+    });
+
   }
 
 }

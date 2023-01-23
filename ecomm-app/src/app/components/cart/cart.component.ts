@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Order } from 'src/app/models/order';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Booking } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
-import { ItemsService } from 'src/app/services/items.service';
 import { OrderService } from 'src/app/services/order.service';
-import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-cart',
@@ -13,18 +11,17 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
 })
 export class CartComponent implements OnInit {
 
-  public order: Order = {}
+  public bookings: Booking[] = []
   constructor(private orderService: OrderService,
-    private cartService: CartService,
-    private itemsService: ItemsService,
-    public dialog: MatDialog) { }
+    private snackBar: MatSnackBar,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getOrder();
   }
 
   public getOrder(): void {
-    this.orderService.getOrder(this.cartService.orderId)
+    this.orderService.getOrder()
       .subscribe(response => {
         if (response && response.succeed) {
           this.process(response.result);
@@ -32,35 +29,19 @@ export class CartComponent implements OnInit {
       })
   }
 
-  private process(order: Order): void {
-    this.order = order;
+  private process(bookings: Booking[]): void {
+    this.bookings = bookings;
   }
 
-  checkout() {
-    const dialogRef = this.dialog.open(ConfirmationComponent, {
-      width: '400px',
-      data: { message: 'Are you sure you want to place this order ?', address: this.order.address },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.order.status = 'Success';
-        this.orderService.updateOrder(this.order).subscribe((res: any) => {
-          if (res && res.succeed) {
-            this.order.items = [];
-            this.order.itemsCount = 0;
-            this.cartService.clearCart();
-          }
-        })
-      }
-    });
+  public cancel(data: Booking) {
+    if (data.bookingId) {
+      this.orderService.updateOrder(data.bookingId).subscribe((res: any) => {
+        if (res && res.succeed) {
+          this.snackBar.open('Tour Package successfully Canceled', 'Close', { duration: 5000 });
+          this.getOrder();
+        }
+      })
+    }
   }
 
-  deleteItem(id: number): void {
-    this.itemsService.deleteItem(id).subscribe((response) => {
-      if (response && response.succeed) {
-        this.getOrder();
-      }
-    });
-  }
 }

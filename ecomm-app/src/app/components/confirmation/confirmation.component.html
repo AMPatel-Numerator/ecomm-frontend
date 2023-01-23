@@ -1,8 +1,9 @@
-<h1 mat-dialog-title>Confirmation order</h1>
+<h1 mat-dialog-title>Confirmation</h1>
 <div mat-dialog-content>
   <p>{{data.message}}</p>
-  <p> Delivery Address : {{ data.address }} </p>
-  <p> Payment Method : Cash on delivery </p>
+  <p> Total Coast : {{ data.price | currency:'EUR' }} </p>
+  <p> Tour Date : {{ data.date }} </p>
+  <p> Payment Method : Credit Card </p>
 </div>
 <div mat-dialog-actions>
   <button mat-flat-button color="primary" [mat-dialog-close]="true" >Yes</button>

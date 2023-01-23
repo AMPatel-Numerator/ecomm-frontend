@@ -1,14 +1,14 @@
-<mat-grid-list cols="{{cols}}" rowHeight="400px" gutterSize="20px" class="grid-layout">
-  <mat-grid-tile *ngFor="let product of products;">
+<mat-grid-list cols="{{cols}}" rowHeight="600px" gutterSize="15px" class="grid-layout">
+  <mat-grid-tile *ngFor="let destination of destinations;">
     <mat-card>
-      <img id="card-image" mat-card-image src="{{product?.imageUrl}}" alt="product photo">
+      <img id="card-image" mat-card-image src="{{destination?.imageUrl}}" alt="destination photo">
       <mat-card-content>
-        <mat-card-title matTooltip="{{product?.name}}">{{product?.name }}</mat-card-title>
-        <mat-card-subtitle>{{product?.price | currency:'EUR'}}</mat-card-subtitle>
+        <mat-card-title matTooltip="{{destination?.name}}">{{destination?.name }}</mat-card-title>
+        <mat-card-subtitle>{{destination?.numDays}} Days {{destination?.numNights}} Nights</mat-card-subtitle>
       </mat-card-content>
       <mat-card-actions style="margin-left: 100px;">
-        <button mat-flat-button color="primary" [routerLink]="['/product', product.productId]">
-          View
+        <button mat-flat-button color="primary" [routerLink]="['/destination', destination.destinationId]">
+          View & Book
         </button>
       </mat-card-actions>
     </mat-card>

@@ -4,6 +4,7 @@ import { catchError, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Item } from '../models/item';
 import { Order } from '../models/order';
+import { Booking } from '../models/product';
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
@@ -11,27 +12,26 @@ import { ErrorHandlerService } from './error-handler.service';
 })
 export class OrderService {
 
-  private url: string = `${environment.apiUrl}/order`;
+  private url: string = `${environment.apiUrl}/booking`;
 
   constructor(
     private http: HttpClient,
     private eh: ErrorHandlerService) { }
 
 
-  createOrder(): Observable<Order> {
-    return this.http.post<Order>(this.url, {})
+  createOrder(booking:Booking): Observable<any> {
+    return this.http.post<Order>(this.url, booking)
       .pipe(catchError(this.eh.handleError));
   }
 
-  getOrder(id: number): Observable<any> {
-    return this.http.get<any>(`${this.url}/${id}`)
+  getOrder(): Observable<any> {
+    return this.http.get<any>(this.url)
       .pipe(catchError(this.eh.handleError));
   }
 
-  updateOrder(order: Order): Observable<Order> {
-    return this.http.put<Order>(
-      `${this.url}/${order.orderId}`,
-      order
+  updateOrder(id: number): Observable<Order> {
+    return this.http.delete<Order>(
+      `${this.url}/${id}`
     )
       .pipe(catchError(this.eh.handleError));
   }

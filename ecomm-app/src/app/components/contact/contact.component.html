@@ -1,0 +1,51 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Contact Details</mat-card-title>
+      </mat-card-header>
+
+      <form class="example-form" #signUpForm="ngForm" (ngSubmit)="onSubmit();signUpForm.resetForm()">
+
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="firstName" name="firstName" placeholder="First Name" required>
+            <mat-error>
+              Please provide a First name.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="lastName" name="lastName"  placeholder="Last Name" required>
+            <mat-error>
+              Please provide a Last name.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="email" name="email"  placeholder="Email" required>
+            <mat-error>
+              Please provide a Email.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="subject" name="subject"  placeholder="Subject" required>
+            <mat-error>
+              Please provide a Subject.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <textarea matInput [(ngModel)]="query" name="query"  placeholder="Query/Questions" required></textarea>
+            <mat-error>
+              Please provide a query.
+            </mat-error>
+          </mat-form-field>
+
+        </mat-card-content>
+
+        <button mat-stroked-button [disabled]="!signUpForm.form.valid" color="accent" class="btn-block">Submit</button>
+
+      </form>
+    </mat-card>
+  </div>
