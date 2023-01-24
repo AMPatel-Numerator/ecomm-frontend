@@ -18,7 +18,7 @@
              <div>
                 <b><label id="example-radio-group-label"> Food :&thinsp; </label></b>
                 <mat-radio-group (change)="foodChange($event)" aria-label="Food" [(ngModel)]="food">
-                    <mat-radio-button value="Yes"> Yes (+{{ ' 3000'| currency:'EUR'}}) </mat-radio-button>
+                    <mat-radio-button value="Yes"> Yes (+{{ ' 300'| currency:'EUR'}}) </mat-radio-button>
                     <mat-radio-button value="No" >No </mat-radio-button>
                   </mat-radio-group>
              </div>
@@ -27,8 +27,8 @@
                 <b><label id="example-radio-group-label"> Travelling Mode :&thinsp; </label></b>
                 <mat-radio-group (change)="modeChange($event)" aria-label="Mode" [(ngModel)]="mode">
                     <mat-radio-button value="Bus"> Bus </mat-radio-button>
-                    <mat-radio-button value="Train" > Train (+{{ ' 1000'| currency:'EUR'}})</mat-radio-button>
-                    <mat-radio-button value="Flight" > Flight (+{{ ' 5000'| currency:'EUR'}}) </mat-radio-button>
+                    <mat-radio-button value="Train" > Train (+{{ ' 100'| currency:'EUR'}})</mat-radio-button>
+                    <mat-radio-button value="Flight" > Flight (+{{ ' 500'| currency:'EUR'}}) </mat-radio-button>
                   </mat-radio-group>
              </div>
             <br>

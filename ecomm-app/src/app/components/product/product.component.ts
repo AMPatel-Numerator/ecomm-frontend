@@ -56,14 +56,14 @@ export class ProductComponent implements OnInit {
 
   book() {
     if (this.booking.mode === "Train") {
-      this.booking.price = (this.booking.price || 0) + 1000;
+      this.booking.price = (this.booking.price || 0) + 100;
     } else if (this.booking.mode === "Flight") {
-      this.booking.price = (this.booking.price || 0) + 5000;
+      this.booking.price = (this.booking.price || 0) + 500;
     } else{
       this.booking.mode = 'Bus'
     }
     if (this.booking.food === "Yes") {
-      this.booking.price = (this.booking.price || 0) + 3000;
+      this.booking.price = (this.booking.price || 0) + 300;
     } else{
       this.booking.food = 'No';
     }

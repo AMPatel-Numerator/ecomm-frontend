@@ -10,7 +10,7 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ecomm-app';
+  title = 'travel-management';
   isAdmin: boolean = false;
   constructor(public router: Router, private userService: UserService, private localStorageService: LocalStorageService) { }
 
