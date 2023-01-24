@@ -13,19 +13,26 @@ import { ErrorHandlerService } from './error-handler.service';
 export class OrderService {
 
   private url: string = `${environment.apiUrl}/booking`;
+  private url1: string = `${environment.apiUrl}/bookings`;
+
 
   constructor(
     private http: HttpClient,
     private eh: ErrorHandlerService) { }
 
 
-  createOrder(booking:Booking): Observable<any> {
+  createOrder(booking: Booking): Observable<any> {
     return this.http.post<Order>(this.url, booking)
       .pipe(catchError(this.eh.handleError));
   }
 
   getOrder(): Observable<any> {
     return this.http.get<any>(this.url)
+      .pipe(catchError(this.eh.handleError));
+  }
+
+  getBookings(): Observable<any> {
+    return this.http.get<any>(this.url1)
       .pipe(catchError(this.eh.handleError));
   }
 

@@ -22,4 +22,5 @@ export interface Booking {
   description?:string;
   price?:number;
   date?:string;
+  travellerName?:string
 }

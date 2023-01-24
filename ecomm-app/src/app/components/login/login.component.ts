@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       if (response.succeed) {
         this.authService.setToken(response.token);
         this.localStorageService.addItem(LocalStorageTypes.User_ID, response.userId);
+        this.localStorageService.addItem(LocalStorageTypes.ADMIN, response.isAdmin);
         this.snackBar.open(
           'You logged in successfully!',
           'Close',

@@ -26,4 +26,14 @@ export class ProductService {
     return this.http.get<Product>(`${this.url}/${id}`)
       .pipe(catchError(this.eh.handleError));
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete<Product>(`${this.url}/${id}`)
+      .pipe(catchError(this.eh.handleError));
+  }
+
+  createProduct(product: Product): Observable<any> {
+    return this.http.post<Product>(this.url,product)
+      .pipe(catchError(this.eh.handleError));
+  }
 }

@@ -42,8 +42,23 @@ export class UserService {
       .pipe(catchError(this.eh.handleError));
   }
 
+  public deleteUser(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.userUrl}/${id}`)
+      .pipe(catchError(this.eh.handleError));
+  }
+
   public contact(contact: Contact): Observable<any> {
     return this.http.post<any>(this.contactUrl, contact)
+      .pipe(catchError(this.eh.handleError));
+  }
+
+  public getQueries(): Observable<Contact[]> {
+    return this.http.get<any>(this.contactUrl)
+      .pipe(catchError(this.eh.handleError));
+  }
+
+  public geAlltUser(): Observable<User[]> {
+    return this.http.get<any>(this.userUrl)
       .pipe(catchError(this.eh.handleError));
   }
 

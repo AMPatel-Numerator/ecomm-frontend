@@ -22,6 +22,11 @@ import { AuthService } from './services/auth.service';
 import { InterceptorService } from './services/interceptor.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ContactComponent } from './components/contact/contact.component';
+import { UsersComponent } from './components/users/users.component';
+import { QueriesComponent } from './components/queries/queries.component';
+import { DestinationsComponent } from './components/destinations/desinations.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { AddDestinationComponent } from './components/add-destination/add-destination.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,12 @@ import { ContactComponent } from './components/contact/contact.component';
     ProductComponent,
     ItemQuantityComponent,
     ConfirmationComponent,
-    ContactComponent
+    ContactComponent,
+    QueriesComponent,
+    UsersComponent,
+    DestinationsComponent,
+    BookingsComponent,
+    AddDestinationComponent
   ],
   imports: [
     BrowserModule,

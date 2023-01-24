@@ -1,0 +1,62 @@
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Destination Details</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" #signUpForm="ngForm" (ngSubmit)="onSubmit();signUpForm.resetForm()">
+
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="destination.name" name="placeName" placeholder="Place Name" required>
+          <mat-error>
+            Please provide a Place Name.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="destination.country" name="placeCountry" placeholder="Country Name" required>
+          <mat-error>
+            Please provide a Country Name
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="destination.numDays" name="numDays" placeholder="Number of Days" required>
+          <mat-error>
+            Please provide a Number of Days.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="destination.numNights" name="numNights" placeholder="Number of Nights" required>
+          <mat-error>
+            Please provide a Number of Nights.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="destination.price" name="price" placeholder="Basic Fees (Euros)" required>
+          <mat-error>
+            Please provide a Basic Fees.
+          </mat-error>
+        </mat-form-field>
+
+        <div>
+            <b><label> Upload a place photo</label></b>
+            <input required type='file' id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput [(ngModel)]="destination.description" name="description" placeholder="Short Description"
+            required></textarea>
+          <mat-error>
+            Please provide a Short Description.
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button [disabled]="!signUpForm.form.valid" color="accent" class="btn-block">Submit</button>
+
+    </form>
+  </mat-card>
+</div>
